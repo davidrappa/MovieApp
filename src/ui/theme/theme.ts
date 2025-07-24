@@ -30,6 +30,7 @@ const theme = createTheme({
     s20: 20,
     s22: 22,
     s24: 24,
+    s48: 48,
   },
   borderRadii: {
     s4: 4,
