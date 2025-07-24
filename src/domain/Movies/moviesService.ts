@@ -9,6 +9,12 @@ async function getAllPopular(page?: number): Promise<Page<Movie>> {
   return apiAdapter.toPageModel(responseApi, moviesAdapter.toMovies);
 }
 
+async function getByQuery(page?: number, query?: string): Promise<Page<Movie>> {
+  const responseApi = await moviesAPI.getByQuery({ page, query });
+  return apiAdapter.toPageModel(responseApi, moviesAdapter.toMovies);
+}
+
 export const moviesService = {
   getAllPopular,
+  getByQuery,
 };

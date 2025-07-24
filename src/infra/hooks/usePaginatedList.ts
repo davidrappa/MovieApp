@@ -22,15 +22,16 @@ interface PaginatedListOption {
 }
 
 export function usePaginatedList<Data>(
-  queryKey: readonly unknown[],
-  getList: (page: number) => Promise<Page<Data>>,
+  baseQueryKey: readonly unknown[],
+  getList: (page: number, searchQuery?: string) => Promise<Page<Data>>,
+  searchQuery?: string,
   options?: PaginatedListOption
 ): UsePaginatedListResult<Data> {
   const [list, setList] = useState<Data[]>([]);
 
   const query = useInfiniteQuery({
-    queryKey,
-    queryFn: ({ pageParam = 1 }) => getList(pageParam),
+    queryKey: [...baseQueryKey, searchQuery], // importante!
+    queryFn: ({ pageParam = 1 }) => getList(pageParam, searchQuery),
     getNextPageParam: (lastPage) => {
       const nextPage = lastPage.page + 1;
       return nextPage <= lastPage.total_pages ? nextPage : undefined;
@@ -46,6 +47,10 @@ export function usePaginatedList<Data>(
       setList(newList);
     }
   }, [query.data]);
+
+  useEffect(() => {
+    setList([]);
+  }, [searchQuery]);
 
   return {
     list,

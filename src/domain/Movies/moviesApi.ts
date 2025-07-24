@@ -9,4 +9,12 @@ async function getAllPopular(params?: PageParams): Promise<Page<MovieAPI>> {
   return response.data;
 }
 
-export const moviesAPI = { getAllPopular };
+async function getByQuery(
+  params?: PageParams & { query?: string }
+): Promise<Page<MovieAPI>> {
+  const response = await api.get<Page<MovieAPI>>("search/movie", { params });
+
+  return response.data;
+}
+
+export const moviesAPI = { getAllPopular, getByQuery };
