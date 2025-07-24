@@ -1,23 +1,25 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { Dimensions, ImageBackground } from "react-native";
 
+import { Movie } from "@/src/domain/Movies/moviesTypes";
 import { Box } from "./Box";
 import { Icon } from "./Icon";
 import { Text } from "./Text";
-
-const MOVIE_URI =
-  "https://ingresso-a.akamaihd.net/prd/img/movie/lilo-e-stitch/67b31f6d-e938-4cfe-a7dc-78a0a17c86e4.webp";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
 
 const POSTER_WIDTH = SCREEN_WIDTH / 2 - 28;
 const POSTER_HEIGHT = POSTER_WIDTH * (4 / 3);
 
-export function MovieCard() {
+interface MovieCardProps {
+  item: Movie;
+}
+
+export function MovieCard({ item }: MovieCardProps) {
   return (
     <Box borderRadius="s10">
       <ImageBackground
-        source={{ uri: MOVIE_URI }}
+        source={{ uri: item.posterURL }}
         style={{
           width: SCREEN_WIDTH / 2 - 28,
           height: POSTER_HEIGHT,
@@ -31,13 +33,13 @@ export function MovieCard() {
         >
           <Box justifyContent="flex-end" flex={1} padding="s12">
             <Text marginBottom="s4" variant="titleMD" color="gray700">
-              Title
+              {item.title}
             </Text>
 
             <Box flexDirection="row" alignItems="center" gap="s6">
               <Icon name="star" size={10} color="white" />
               <Text variant="textXS" color="gray600">
-                0,0
+                {item.rating}
               </Text>
               <Box
                 width={4}
@@ -46,7 +48,7 @@ export function MovieCard() {
                 borderRadius="s6"
               />
               <Text color="gray600" variant="textXS">
-                AAAA
+                {item.releaseYear}
               </Text>
             </Box>
           </Box>
