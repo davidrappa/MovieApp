@@ -5,6 +5,7 @@ import { ArrowLeftIcon } from "@/assets/icons/ArrowLeftIcon";
 import { FavoritesIcon } from "@/assets/icons/FavoritesIcon";
 import { MovieIcon } from "@/assets/icons/MovieIcon";
 import { SearchIcon } from "@/assets/icons/SearchIcon";
+import { StarIcon } from "@/assets/icons/StarIcon";
 import { ThemeColors } from "../theme/theme";
 import { useAppTheme } from "../theme/useAppTheme";
 
@@ -44,6 +45,7 @@ const iconRegistry = {
   favorites: FavoritesIcon,
   search: SearchIcon,
   movie: MovieIcon,
+  star: StarIcon,
 };
 
 type IconType = typeof iconRegistry;

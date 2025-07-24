@@ -1,18 +1,18 @@
-import {createTheme} from '@shopify/restyle';
+import { createTheme } from "@shopify/restyle";
 
 const palette = {
-  purpleBase: '#892CCD',
-  purpleLight: '#A85FDD',
+  purpleBase: "#892CCD",
+  purpleLight: "#A85FDD",
 
-  gray100: '#0F0F1A',
-  gray200: '#131320',
-  gray300: '#1A1B2D',
-  gray400: '#45455F',
-  gray500: '#7A7B9F',
-  gray600: '#B5B6C9',
-  gray700: '#E4E5EC',
+  gray100: "#0F0F1A",
+  gray200: "#131320",
+  gray300: "#1A1B2D",
+  gray400: "#45455F",
+  gray500: "#7A7B9F",
+  gray600: "#B5B6C9",
+  gray700: "#E4E5EC",
 
-  white: '#FFFFFF',
+  white: "#FFFFFF",
 };
 
 const theme = createTheme({
@@ -35,14 +35,52 @@ const theme = createTheme({
     s4: 4,
     s6: 6,
     s8: 8,
+    s10: 10,
   },
   textVariants: {
-    defaults: {},
+    defaults: {
+      color: "gray500",
+      fontFamily: "NunitoSans",
+      fontSize: 16,
+      lineHeight: 18,
+    },
+    displayLG: {
+      fontSize: 20,
+      fontFamily: "RammettoOne-Regular",
+      lineHeight: 32,
+    },
+    titleXL: {
+      fontSize: 24,
+      fontFamily: "Rajdhani-Bold",
+    },
+    titleLG: {
+      fontSize: 28,
+      fontFamily: "Rajdhani-Bold",
+    },
+    titleMD: {
+      fontSize: 16,
+      fontFamily: "Rajdhani-Bold",
+    },
+    textMD: {
+      fontSize: 16,
+      fontFamily: "NunitoSans",
+      lineHeight: 24,
+    },
+    textSM: {
+      fontSize: 14,
+      fontFamily: "NunitoSans",
+      lineHeight: 20,
+    },
+    textXS: {
+      fontSize: 12,
+      fontFamily: "NunitoSans",
+      lineHeight: 16,
+    },
   },
 });
 
 export type Theme = typeof theme;
 
-export type ThemeColors = keyof Theme['colors'];
+export type ThemeColors = keyof Theme["colors"];
 
 export default theme;
