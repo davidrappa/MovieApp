@@ -35,7 +35,7 @@ export function MovieDetailsInfo({
           </Text>
           <Text mb="s2" color="gray600" variant="textMD">
             <Text variant="textMDB" color="gray600">
-              Duração:
+              Lançamento:
             </Text>
             {` ` + releaseDate}
           </Text>
