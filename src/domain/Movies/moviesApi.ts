@@ -1,7 +1,7 @@
 import { api } from "@/src/api/apiConfig";
 import { PageParams } from "@/src/api/apiTypes";
 import { Page } from "@/src/infra/hooks/usePaginatedList";
-import { MovieAPI } from "./moviesTypes";
+import { MovieAPI, MovieDetailsAPI } from "./moviesTypes";
 
 async function getAllPopular(params?: PageParams): Promise<Page<MovieAPI>> {
   const response = await api.get<Page<MovieAPI>>("movie/popular", { params });
@@ -17,4 +17,10 @@ async function getByQuery(
   return response.data;
 }
 
-export const moviesAPI = { getAllPopular, getByQuery };
+async function getById(id: number): Promise<MovieDetailsAPI> {
+  const response = await api.get<MovieDetailsAPI>(`movie/${id}`);
+
+  return response.data;
+}
+
+export const moviesAPI = { getAllPopular, getByQuery, getById };
