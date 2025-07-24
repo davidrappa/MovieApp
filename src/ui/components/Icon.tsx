@@ -3,6 +3,7 @@ import { Pressable } from "react-native";
 import { ArrowLeftIcon } from "@/assets/icons/ArrowLeftIcon";
 
 import { FavoritesIcon } from "@/assets/icons/FavoritesIcon";
+import { ListIcon } from "@/assets/icons/ListIcon";
 import { MovieIcon } from "@/assets/icons/MovieIcon";
 import { SearchIcon } from "@/assets/icons/SearchIcon";
 import { StarIcon } from "@/assets/icons/StarIcon";
@@ -46,6 +47,7 @@ const iconRegistry = {
   search: SearchIcon,
   movie: MovieIcon,
   star: StarIcon,
+  list: ListIcon,
 };
 
 type IconType = typeof iconRegistry;
