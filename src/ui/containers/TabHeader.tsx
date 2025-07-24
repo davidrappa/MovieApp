@@ -10,15 +10,9 @@ interface TabHeaderProps {
 
 export function TabHeader({ title, subtitle, icon }: TabHeaderProps) {
   return (
-    <Box>
+    <Box paddingBottom="s20">
       <Icon name={icon} size={40} color="purpleBase" />
-      <Text
-        fontFamily="RammettoOne-Regular"
-        fontSize={20}
-        marginTop="s12"
-        color="white"
-        marginBottom="s4"
-      >
+      <Text variant="displayLG" marginTop="s12" color="white" marginBottom="s4">
         {title}
       </Text>
       <Text fontFamily="NunitoSans" fontSize={16} color="gray700">
