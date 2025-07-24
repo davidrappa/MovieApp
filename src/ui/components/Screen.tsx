@@ -1,24 +1,31 @@
-import {PropsWithChildren} from 'react';
-import {KeyboardAvoidingView, Platform, ScrollView, View} from 'react-native';
-import {Box, BoxProps} from './Box';
+import { PropsWithChildren } from "react";
+import { KeyboardAvoidingView, Platform, ScrollView, View } from "react-native";
+import { Box, BoxProps } from "./Box";
 
 export function Screen({
   children,
   scrollable = false,
   ...boxProps
-}: PropsWithChildren & BoxProps & {scrollable?: boolean}) {
+}: PropsWithChildren & BoxProps & { scrollable?: boolean }) {
   const Container = scrollable ? ScrollView : View;
 
   return (
     <KeyboardAvoidingView
-      style={{flex: 1}}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      style={{ flex: 1 }}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
       <Box
         flex={1}
         backgroundColor="gray100"
         paddingHorizontal="s20"
-        {...boxProps}>
-        <Container showsVerticalScrollIndicator={false}>{children}</Container>
+        {...boxProps}
+      >
+        <Container
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ flexGrow: 1 }}
+        >
+          {children}
+        </Container>
       </Box>
     </KeyboardAvoidingView>
   );

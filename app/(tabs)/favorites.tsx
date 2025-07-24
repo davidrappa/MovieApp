@@ -6,7 +6,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function FavoritesScreen() {
   return (
-    <Screen style={{ paddingHorizontal: 20, paddingTop: 28 }}>
+    <Screen>
       <SafeAreaView>
         <TabHeader
           icon="favorites"

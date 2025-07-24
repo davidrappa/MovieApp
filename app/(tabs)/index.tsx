@@ -14,7 +14,7 @@ export default function PopularScreen() {
   const { isLoading, list, fetchNextPage } = usePopularList();
 
   return (
-    <Screen style={{ flex: 1, paddingHorizontal: 20, alignItems: "center" }}>
+    <Screen alignItems="center">
       <SafeAreaView edges={["top"]}>
         {isLoading && (
           <Box flex={1} justifyContent="center" alignItems="center">

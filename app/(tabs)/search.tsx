@@ -23,7 +23,7 @@ export default function SearchScreen() {
   );
 
   return (
-    <Screen style={{ paddingHorizontal: 20, paddingTop: 28 }}>
+    <Screen>
       <SafeAreaView>
         <FlatList
           ListHeaderComponent={
