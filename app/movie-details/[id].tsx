@@ -6,7 +6,6 @@ import { MovieDetailsHeader } from "@/src/ui/containers/movie-details/MovieDetai
 import { MovieDetailsInfo } from "@/src/ui/containers/movie-details/MovieDetailsInfo";
 import { MovieDetailsOverview } from "@/src/ui/containers/movie-details/MovieDetailsOverview";
 import { useLocalSearchParams } from "expo-router";
-import { Fragment } from "react";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -15,7 +14,7 @@ export default function MovieDetails() {
 
   const { data, isLoading } = useMovieById(Number(id));
   return (
-    <Screen scrollable>
+    <Screen scrollable noPaddingsHorizontal>
       <SafeAreaView style={{ flex: 1 }}>
         {isLoading && (
           <Box flex={1} alignItems="center" justifyContent="center">
@@ -23,7 +22,7 @@ export default function MovieDetails() {
           </Box>
         )}
         {!isLoading && data && (
-          <Fragment>
+          <Box paddingHorizontal="s20">
             <MovieDetailsHeader backdropURL={data.backdropURL} />
             <MovieDetailsInfo
               title={data.title}
@@ -32,7 +31,7 @@ export default function MovieDetails() {
               releaseDate={data.releaseDate}
             />
             <MovieDetailsOverview overview={data.overview} />
-          </Fragment>
+          </Box>
         )}
       </SafeAreaView>
     </Screen>

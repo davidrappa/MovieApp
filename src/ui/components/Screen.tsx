@@ -5,8 +5,10 @@ import { Box, BoxProps } from "./Box";
 export function Screen({
   children,
   scrollable = false,
+  noPaddingsHorizontal = false,
   ...boxProps
-}: PropsWithChildren & BoxProps & { scrollable?: boolean }) {
+}: PropsWithChildren &
+  BoxProps & { scrollable?: boolean; noPaddingsHorizontal?: boolean }) {
   const Container = scrollable ? ScrollView : View;
 
   return (
@@ -17,7 +19,7 @@ export function Screen({
       <Box
         flex={1}
         backgroundColor="gray100"
-        paddingHorizontal="s20"
+        paddingHorizontal={noPaddingsHorizontal ? undefined : "s20"}
         {...boxProps}
       >
         <Container
