@@ -14,7 +14,7 @@ export function EmptyList({ title, subtitle, containerProps }: EmptyListProps) {
       <Icon name="list" size={44} color="gray500" />
       <Box mt="s12" alignItems="center">
         {title && (
-          <Text variant="textMD" color="gray500" mb="s4">
+          <Text variant="textMDB" color="gray500" mb="s4">
             {title}
           </Text>
         )}
