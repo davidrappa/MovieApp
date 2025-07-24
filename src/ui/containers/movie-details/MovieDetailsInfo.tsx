@@ -6,7 +6,7 @@ interface MovieDetailsInfoProps {
   title: string;
   duration: string;
   releaseDate: string;
-  rating: number;
+  rating: string;
 }
 
 export function MovieDetailsInfo({

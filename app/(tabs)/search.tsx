@@ -53,7 +53,7 @@ export default function SearchScreen() {
           onEndReachedThreshold={0.2}
           onEndReached={fetchNextPage}
           ItemSeparatorComponent={() => <Separator />}
-          columnWrapperStyle={{ gap: 12, justifyContent: "center" }}
+          columnWrapperStyle={{ gap: 12 }}
           contentContainerStyle={{ paddingBottom: 32 }}
           renderItem={({ item }: ListRenderItemInfo<Movie>) => (
             <MovieCard item={item} />
