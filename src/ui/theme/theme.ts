@@ -53,10 +53,12 @@ const theme = createTheme({
     titleXL: {
       fontSize: 24,
       fontFamily: "Rajdhani-Bold",
+      lineHeight: 32,
     },
     titleLG: {
       fontSize: 28,
       fontFamily: "Rajdhani-Bold",
+      lineHeight: 38,
     },
     titleMD: {
       fontSize: 16,
@@ -64,17 +66,32 @@ const theme = createTheme({
     },
     textMD: {
       fontSize: 16,
-      fontFamily: "NunitoSans",
+      fontFamily: "NunitoSans-Regular",
       lineHeight: 24,
+    },
+    textMDB: {
+      fontSize: 16,
+      fontFamily: "NunitoSans-Bold",
+      lineHeight: 28,
     },
     textSM: {
       fontSize: 14,
-      fontFamily: "NunitoSans",
+      fontFamily: "NunitoSans-Regular",
+      lineHeight: 20,
+    },
+    textSMB: {
+      fontSize: 14,
+      fontFamily: "NunitoSans-Bold",
       lineHeight: 20,
     },
     textXS: {
       fontSize: 12,
-      fontFamily: "NunitoSans",
+      fontFamily: "NunitoSans-Regular",
+      lineHeight: 16,
+    },
+    textXSB: {
+      fontSize: 12,
+      fontFamily: "NunitoSans-Bold",
       lineHeight: 16,
     },
   },
