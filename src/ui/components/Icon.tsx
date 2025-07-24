@@ -5,8 +5,10 @@ import { ArrowLeftIcon } from "@/assets/icons/ArrowLeftIcon";
 import { FavoritesIcon } from "@/assets/icons/FavoritesIcon";
 import { ListIcon } from "@/assets/icons/ListIcon";
 import { MovieIcon } from "@/assets/icons/MovieIcon";
+import { SaveIcon } from "@/assets/icons/SaveIcon";
 import { SearchIcon } from "@/assets/icons/SearchIcon";
 import { StarIcon } from "@/assets/icons/StarIcon";
+import { YoutubeIcon } from "@/assets/icons/YoutubeIcon";
 import { ThemeColors } from "../theme/theme";
 import { useAppTheme } from "../theme/useAppTheme";
 
@@ -48,6 +50,8 @@ const iconRegistry = {
   movie: MovieIcon,
   star: StarIcon,
   list: ListIcon,
+  save: SaveIcon,
+  youtube: YoutubeIcon,
 };
 
 type IconType = typeof iconRegistry;
