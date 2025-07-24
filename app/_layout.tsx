@@ -11,7 +11,10 @@ const queryClient = new QueryClient();
 
 export default function RootLayout() {
   const [loaded] = useFonts({
-    NunitoSans: require("../assets/fonts/NunitoSans.ttf"),
+    "NunitoSans-Light": require("../assets/fonts/NunitoSans-Light.ttf"),
+    "NunitoSans-Regular": require("../assets/fonts/NunitoSans-Regular.ttf"),
+    "NunitoSans-SemiBold": require("../assets/fonts/NunitoSans-SemiBold.ttf"),
+    "NunitoSans-Bold": require("../assets/fonts/NunitoSans-Bold.ttf"),
     "Rajdhani-Bold": require("../assets/fonts/Rajdhani-Bold.ttf"),
     "Rajdhani-Light": require("../assets/fonts/Rajdhani-Light.ttf"),
     "Rajdhani-Medium": require("../assets/fonts/Rajdhani-Medium.ttf"),
