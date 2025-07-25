@@ -6,9 +6,15 @@ import { Text } from "../../components/Text";
 
 interface MovieDetailsBottomProps {
   id: number;
+  isFavorite: boolean;
+  toggleFavorite: () => void;
 }
 
-export function MovieDetailsBottom({ id }: MovieDetailsBottomProps) {
+export function MovieDetailsBottom({
+  id,
+  isFavorite,
+  toggleFavorite,
+}: MovieDetailsBottomProps) {
   const { data, isLoading } = useMovieVideoById(id);
 
   function openTrailerLink() {
@@ -19,6 +25,7 @@ export function MovieDetailsBottom({ id }: MovieDetailsBottomProps) {
   return (
     <Box flexDirection="row" paddingHorizontal="s20" gap="s8">
       <TouchableOpacityBox
+        onPress={toggleFavorite}
         backgroundColor="gray300"
         borderRadius="s6"
         justifyContent="center"
@@ -26,7 +33,11 @@ export function MovieDetailsBottom({ id }: MovieDetailsBottomProps) {
         width={48}
         height={48}
       >
-        <Icon name="save" size={24} color="purpleLight" />
+        {isFavorite ? (
+          <Icon name="trash" size={24} color="purpleLight" />
+        ) : (
+          <Icon name="save" size={24} color="purpleLight" />
+        )}
       </TouchableOpacityBox>
       <TouchableOpacityBox
         disabled={isLoading}

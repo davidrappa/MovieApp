@@ -20,6 +20,7 @@ export interface Movie {
   title: string;
   rating: string;
   releaseYear: number;
+  releaseDate?: string;
   posterURL: string;
 }
 
@@ -32,6 +33,7 @@ export interface MovieDetailsAPI {
   release_date: string;
   budget: number;
   homepage: string;
+  poster_path: string;
   id: number;
   runtime: number;
   imdb_id: string;
@@ -44,7 +46,9 @@ export interface MovieDetails {
   id: number;
   title: string;
   rating: string;
+  posterURL: string;
   releaseDate: string;
+  releaseYear: string;
   duration: string;
   backdropURL: string;
   overview: string;

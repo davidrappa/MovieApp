@@ -1,4 +1,5 @@
 import { useMovieById } from "@/src/domain/Movies/useCases/useMovieById";
+import { useFavoritesStore } from "@/src/infra/store/favoritesStore";
 import { ActivityIndicator } from "@/src/ui/components/ActivityIndicator";
 import { Box } from "@/src/ui/components/Box";
 import { Screen } from "@/src/ui/components/Screen";
@@ -12,8 +13,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function MovieDetails() {
   const { id } = useLocalSearchParams();
-
   const { data, isLoading } = useMovieById(Number(id));
+  const { isFavorite, toggleFavorite } = useFavoritesStore();
   return (
     <Screen scrollable noPaddingsHorizontal>
       <SafeAreaView style={{ flex: 1 }}>
@@ -34,7 +35,11 @@ export default function MovieDetails() {
               />
               <MovieDetailsOverview overview={data.overview} />
             </Box>
-            <MovieDetailsBottom id={data.id} />
+            <MovieDetailsBottom
+              id={data.id}
+              isFavorite={isFavorite(data.id)}
+              toggleFavorite={() => toggleFavorite(data)}
+            />
           </Box>
         )}
       </SafeAreaView>

@@ -22,13 +22,16 @@ function toMovieDetails(movieDetailsAPI: MovieDetailsAPI): MovieDetails {
   const hours = Math.floor(movieDetailsAPI.runtime / 60);
   const minutes = movieDetailsAPI.runtime % 60;
   const formattedDuration = `${hours}h ${minutes}min`;
+  const releaseDate = new Date(movieDetailsAPI.release_date).toLocaleDateString(
+    "en-GB"
+  );
 
   return {
     id: movieDetailsAPI.id,
     title: movieDetailsAPI.title,
-    releaseDate: new Date(movieDetailsAPI.release_date).toLocaleDateString(
-      "en-GB"
-    ),
+    releaseDate,
+    releaseYear: releaseDate.split("/")[2],
+    posterURL: TMDB_IMAGE_URL + movieDetailsAPI.poster_path,
     rating: movieDetailsAPI.vote_average.toPrecision(2),
     backdropURL: TMDB_IMAGE_URL + movieDetailsAPI.backdrop_path,
     duration: formattedDuration,

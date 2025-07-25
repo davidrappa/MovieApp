@@ -2,6 +2,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Dimensions, ImageBackground } from "react-native";
 
 import { Movie } from "@/src/domain/Movies/moviesTypes";
+import { useFavoritesStore } from "@/src/infra/store/favoritesStore";
 import { Link } from "expo-router";
 import { Box, TouchableOpacityBox } from "./Box";
 import { Icon } from "./Icon";
@@ -17,6 +18,7 @@ interface MovieCardProps {
 }
 
 export function MovieCard({ item }: MovieCardProps) {
+  const { isFavorite, toggleFavorite } = useFavoritesStore();
   return (
     <Link push href={`/movie-details/${item.id}`} asChild>
       <TouchableOpacityBox borderRadius="s10">
@@ -27,8 +29,24 @@ export function MovieCard({ item }: MovieCardProps) {
             height: POSTER_HEIGHT,
             borderRadius: 10,
             overflow: "hidden",
+            position: "relative",
           }}
         >
+          {isFavorite(item.id) && (
+            <Box position="absolute" right={4} top={4} zIndex={3}>
+              <TouchableOpacityBox
+                onPress={() => toggleFavorite(item)}
+                width={36}
+                height={36}
+                backgroundColor="gray300"
+                borderRadius="s6"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Icon name="trash" size={20} color="purpleLight" />
+              </TouchableOpacityBox>
+            </Box>
+          )}
           <LinearGradient
             style={{ width: "100%", height: "100%" }}
             colors={["transparent", "rgba(0,0,0,0.8)"]}
