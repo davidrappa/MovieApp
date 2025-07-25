@@ -34,7 +34,7 @@ export default function MovieDetails() {
               />
               <MovieDetailsOverview overview={data.overview} />
             </Box>
-            <MovieDetailsBottom />
+            <MovieDetailsBottom id={data.id} />
           </Box>
         )}
       </SafeAreaView>

@@ -24,7 +24,7 @@ export default function SearchScreen() {
 
   return (
     <Screen>
-      <SafeAreaView>
+      <SafeAreaView edges={["top"]}>
         <FlatList
           ListHeaderComponent={
             <Box marginBottom="s16">

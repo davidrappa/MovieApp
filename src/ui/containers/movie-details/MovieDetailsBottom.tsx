@@ -1,8 +1,21 @@
+import { useMovieVideoById } from "@/src/domain/Movies/useCases/useMovieVideoById";
+import { Linking } from "react-native";
 import { Box, TouchableOpacityBox } from "../../components/Box";
 import { Icon } from "../../components/Icon";
 import { Text } from "../../components/Text";
 
-export function MovieDetailsBottom() {
+interface MovieDetailsBottomProps {
+  id: number;
+}
+
+export function MovieDetailsBottom({ id }: MovieDetailsBottomProps) {
+  const { data, isLoading } = useMovieVideoById(id);
+
+  function openTrailerLink() {
+    const url = `https://www.youtube.com/watch?v=${data?.key}`;
+    Linking.openURL(url);
+  }
+
   return (
     <Box flexDirection="row" paddingHorizontal="s20" gap="s8">
       <TouchableOpacityBox
@@ -16,6 +29,8 @@ export function MovieDetailsBottom() {
         <Icon name="save" size={24} color="purpleLight" />
       </TouchableOpacityBox>
       <TouchableOpacityBox
+        disabled={isLoading}
+        onPress={openTrailerLink}
         backgroundColor="purpleBase"
         borderRadius="s6"
         flexDirection="row"

@@ -1,4 +1,11 @@
-import { Movie, MovieAPI, MovieDetails, MovieDetailsAPI } from "./moviesTypes";
+import {
+  Movie,
+  MovieAPI,
+  MovieDetails,
+  MovieDetailsAPI,
+  MovieVideo,
+  MovieVideoAPI,
+} from "./moviesTypes";
 
 const TMDB_IMAGE_URL = "https://image.tmdb.org/t/p/w500";
 
@@ -28,4 +35,12 @@ function toMovieDetails(movieDetailsAPI: MovieDetailsAPI): MovieDetails {
     overview: movieDetailsAPI.overview,
   };
 }
-export const moviesAdapter = { toMovies, toMovieDetails };
+
+function toVideo(videoAPI: MovieVideoAPI): MovieVideo {
+  return {
+    id: videoAPI.id,
+    key: videoAPI.results[0].key,
+    site: videoAPI.results[0].site,
+  };
+}
+export const moviesAdapter = { toMovies, toMovieDetails, toVideo };
