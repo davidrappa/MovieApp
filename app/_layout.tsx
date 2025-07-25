@@ -1,3 +1,5 @@
+import { AsyncStorage } from "@/src/infra/storage/implementation/AsyncStorage";
+import { initializeStorage } from "@/src/infra/storage/storage";
 import { AppStack } from "@/src/ui/navigation/AppStack";
 import theme from "@/src/ui/theme/theme";
 import { ThemeProvider } from "@shopify/restyle";
@@ -8,6 +10,8 @@ import "react-native-reanimated";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
 const queryClient = new QueryClient();
+
+initializeStorage(AsyncStorage);
 
 export default function RootLayout() {
   const [loaded] = useFonts({
