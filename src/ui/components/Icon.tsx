@@ -8,6 +8,7 @@ import { MovieIcon } from "@/assets/icons/MovieIcon";
 import { SaveIcon } from "@/assets/icons/SaveIcon";
 import { SearchIcon } from "@/assets/icons/SearchIcon";
 import { StarIcon } from "@/assets/icons/StarIcon";
+import { TrashIcon } from "@/assets/icons/TrashIcon";
 import { YoutubeIcon } from "@/assets/icons/YoutubeIcon";
 import { ThemeColors } from "../theme/theme";
 import { useAppTheme } from "../theme/useAppTheme";
@@ -52,6 +53,7 @@ const iconRegistry = {
   list: ListIcon,
   save: SaveIcon,
   youtube: YoutubeIcon,
+  trash: TrashIcon,
 };
 
 type IconType = typeof iconRegistry;
