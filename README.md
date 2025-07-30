@@ -1,50 +1,30 @@
-# Welcome to your Expo app 👋
+# 📱 Movie App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Bem-vindo ao repositório do Movie App. Usei esse projeto para aprimorar e consolidar os conceitos práticos utilizados no mercado de trabalho, desde o básico até avançado, tudo isso construindo um App utilizando API [Themoviedb](https://www.themoviedb.org/), focando em arquitetura, **Domain Drive Design**, MVVM, Expo Router e **Typescript** 
 
-## Get started
+|                               |                               |                               |                               |
+| :---------------------------: | :---------------------------: | :---------------------------: | :---------------------------: |
+| ![](docs/images/screen-1.png) | ![](docs/images/screen-2.png) | ![](docs/images/screen-3.png) | ![](docs/images/screen-4.png) |
+| ![](docs/images/screen-5.png) | ![](docs/images/screen-6.png) |
 
-1. Install dependencies
+Confira o Figma completo com todas as tela [aqui](https://www.figma.com/community/file/1509971053495906327)!
 
-   ```bash
-   npm install
-   ```
+## ⛏️ Tech (Bibliotecas e Tecnologias)
 
-2. Start the app
+- [React Native](https://reactnative.dev/docs/getting-started-without-a-framework)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Zustand](https://zustand.docs.pmnd.rs/getting-started/introduction)
+- [TanStack Query (React Query)](https://tanstack.com/query/latest)
+- [Shopify Restyle](https://shopify.github.io/restyle/)
 
-   ```bash
-   npx expo start
-   ```
+## 🏗️ Arquitetura do Projeto
 
-In the output, you'll find options to open the app in a
+O Movie App adota uma arquitetura em camadas com princípios de Clean Architecture, SOLID, design patterns e MVVM (Model-View-ViewModel). Esta estrutura, validada em projetos com milhares de usuários, visa criar apps fáceis de entender e manter, além de escaláveis em termos de base de código e equipe.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## 👨🏻‍💻 Quem sou eu?
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+**David Rappa** é um especialista em React Native com **mais de 5 anos de experiência** pratica no desenvolvimento de aplicativos de alto desempenho para empresas no **Brasil**. Atualmente trabalhando como **engenheiro de software pleno** em uma empresa de e-commerce no Brasil.
 
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- [LinkedIn](https://www.linkedin.com/in/davidrappa1/)
+- [GitHub](https://github.com/davidrappa)
+- [Instagram](https://www.instagram.com/dvdrpp/)
