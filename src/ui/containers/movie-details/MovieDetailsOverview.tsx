@@ -8,7 +8,13 @@ interface MovieDetailsOverviewProps {
 export function MovieDetailsOverview({ overview }: MovieDetailsOverviewProps) {
   return (
     <Box borderTopWidth={1} borderBottomWidth={1} borderColor="gray300">
-      <Text variant="textMD" color="gray600" paddingVertical="s16">
+      <Text
+        variant="textMD"
+        color="gray600"
+        paddingVertical="s16"
+        accessibilityLabel={`Sinopse do filme em inglês: ${overview}`}
+        accessibilityRole="text"
+      >
         {overview}
       </Text>
     </Box>

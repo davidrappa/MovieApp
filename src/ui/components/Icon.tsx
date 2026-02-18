@@ -1,7 +1,6 @@
 import { Pressable } from "react-native";
 
 import { ArrowLeftIcon } from "@/assets/icons/ArrowLeftIcon";
-
 import { FavoritesIcon } from "@/assets/icons/FavoritesIcon";
 import { ListIcon } from "@/assets/icons/ListIcon";
 import { MovieIcon } from "@/assets/icons/MovieIcon";
@@ -23,19 +22,30 @@ export type IconProps = {
   color?: ThemeColors;
   size?: number;
   onPress?: () => void;
+  accessibilityLabel?: string;
+  accessibilityRole?: "button" | "image";
 };
+
 export function Icon({
   name,
   color = "gray200",
   size = 24,
   onPress,
+  accessibilityLabel,
+  accessibilityRole = "button",
 }: IconProps) {
   const { colors } = useAppTheme();
   const SVGIcon = iconRegistry[name];
 
   if (onPress) {
     return (
-      <Pressable hitSlop={10} onPress={onPress}>
+      <Pressable
+        hitSlop={10}
+        onPress={onPress}
+        accessible={true}
+        accessibilityRole={accessibilityRole}
+        accessibilityLabel={accessibilityLabel}
+      >
         <SVGIcon color={colors[color] as ThemeColors} size={size} />
       </Pressable>
     );

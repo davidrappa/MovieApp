@@ -17,7 +17,13 @@ export function MovieDetailsInfo({
 }: MovieDetailsInfoProps) {
   return (
     <Box>
-      <Text mb="s8" variant="titleXL" color="gray700">
+      <Text
+        mb="s8"
+        variant="titleXL"
+        color="gray700"
+        accessibilityLabel={`Título do filme: ${title}`}
+        accessibilityRole="text"
+      >
         {title}
       </Text>
       <Box
@@ -28,13 +34,23 @@ export function MovieDetailsInfo({
       >
         <Box>
           <Text mb="s2" color="gray600" variant="textMD">
-            <Text variant="textMDB" color="gray600">
+            <Text
+              variant="textMDB"
+              color="gray600"
+              accessibilityLabel={`Duração do filme: ${duration}`}
+              accessibilityRole="text"
+            >
               Duração:
             </Text>
             {` ` + duration}
           </Text>
           <Text mb="s2" color="gray600" variant="textMD">
-            <Text variant="textMDB" color="gray600">
+            <Text
+              variant="textMDB"
+              color="gray600"
+              accessibilityLabel={`Data de lançamento do filme: ${releaseDate}`}
+              accessibilityRole="text"
+            >
               Lançamento:
             </Text>
             {` ` + releaseDate}
@@ -52,10 +68,15 @@ export function MovieDetailsInfo({
           paddingVertical="s4"
         >
           <Icon name="star" color="purpleLight" />
-          <Text variant="titleLG" color="gray600">
+          <Text
+            variant="titleLG"
+            color="gray600"
+            accessibilityRole="text"
+            accessibilityLabel={`Avaliação do filme: ${rating} de 10`}
+          >
             {rating}
           </Text>
-          <Text variant="textMD" color="gray600" mt="s6">
+          <Text variant="textMD" color="gray600" mt="s6" accessible={false}>
             / 10
           </Text>
         </Box>

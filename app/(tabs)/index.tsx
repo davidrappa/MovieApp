@@ -11,7 +11,7 @@ import { TabHeader } from "@/src/ui/containers/TabHeader";
 import { FlatList, ListRenderItemInfo } from "react-native";
 
 export default function PopularScreen() {
-  const { isLoading, list, fetchNextPage } = usePopularList();
+  const { isLoading, list } = usePopularList();
 
   return (
     <Screen alignItems="center">
@@ -23,6 +23,8 @@ export default function PopularScreen() {
         )}
         {!isLoading && (
           <FlatList
+            importantForAccessibility="no"
+            accessibilityRole="list"
             ListHeaderComponent={
               <TabHeader
                 icon="movie"
@@ -34,7 +36,6 @@ export default function PopularScreen() {
             data={list}
             numColumns={2}
             onEndReachedThreshold={0.2}
-            onEndReached={fetchNextPage}
             ItemSeparatorComponent={() => <Separator />}
             columnWrapperStyle={{ gap: 12, justifyContent: "center" }}
             contentContainerStyle={{ paddingBottom: 32 }}
