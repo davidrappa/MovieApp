@@ -29,6 +29,7 @@ export function MovieCard({ item }: MovieCardProps) {
       >
         <ImageBackground
           source={{ uri: item.posterURL }}
+          accessible={false}
           style={{
             width: SCREEN_WIDTH / 2 - 28,
             height: POSTER_HEIGHT,
@@ -47,14 +48,19 @@ export function MovieCard({ item }: MovieCardProps) {
                 borderRadius="s6"
                 justifyContent="center"
                 alignItems="center"
+                accessibilityRole="button"
+                accessibilityLabel="Remover dos favoritos"
+                accessibilityHint="Toque duas vezes para remover este filme dos favoritos"
               >
-                <Icon name="trash" size={20} color="purpleLight" />
+                <Icon name="trash" size={20} color="purpleLight" accessibilityLabel="" accessibilityRole="image" />
               </TouchableOpacityBox>
             </Box>
           )}
           <LinearGradient
             style={{ width: "100%", height: "100%" }}
             colors={["transparent", "rgba(0,0,0,0.8)"]}
+            accessibilityElementsHidden={true}
+            importantForAccessibility="no"
           >
             <Box justifyContent="flex-end" flex={1} padding="s12">
               <Text marginBottom="s4" variant="titleMD" color="gray700">

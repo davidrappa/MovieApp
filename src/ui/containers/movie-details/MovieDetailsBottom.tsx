@@ -32,24 +32,39 @@ export function MovieDetailsBottom({
         alignItems="center"
         width={48}
         height={48}
-        accessibilityHint="Adicione o filme nos seus favoritos"
+        accessibilityHint={isFavorite ? "Toque duas vezes para remover dos favoritos" : "Toque duas vezes para adicionar aos favoritos"}
         accessibilityLabel={
           isFavorite ? "Remover dos favoritos" : "Adicionar aos favoritos"
         }
         accessibilityRole="button"
+        accessibilityState={{ selected: isFavorite }}
+        hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
       >
         {isFavorite ? (
-          <Icon name="trash" size={24} color="purpleLight" />
+          <Icon 
+            name="trash" 
+            size={24} 
+            color="purpleLight"
+            accessibilityLabel=""
+            accessibilityRole="image"
+          />
         ) : (
-          <Icon name="save" size={24} color="purpleLight" />
+          <Icon 
+            name="save" 
+            size={24} 
+            color="purpleLight"
+            accessibilityLabel=""
+            accessibilityRole="image"
+          />
         )}
       </TouchableOpacityBox>
       <TouchableOpacityBox
         disabled={isLoading}
         onPress={openTrailerLink}
-        accessibilityHint="Abra para ver o trailer do filme"
-        accessibilityLabel="Trailer do filme no YouTube"
+        accessibilityHint={isLoading ? "Carregando trailer" : "Toque duas vezes para abrir o trailer no YouTube"}
+        accessibilityLabel="Assistir trailer do filme"
         accessibilityRole="button"
+        accessibilityState={{ disabled: isLoading }}
         backgroundColor="purpleBase"
         borderRadius="s6"
         flexDirection="row"
@@ -58,8 +73,15 @@ export function MovieDetailsBottom({
         alignItems="center"
         flex={1}
         height={48}
+        minHeight={44}
       >
-        <Icon name="youtube" size={24} color="gray700" />
+        <Icon 
+          name="youtube" 
+          size={24} 
+          color="gray700"
+          accessibilityLabel=""
+          accessibilityRole="image"
+        />
         <Text variant="textMD" color="gray700">
           Assistir trailer
         </Text>

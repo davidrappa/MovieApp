@@ -41,6 +41,8 @@ export default function SearchScreen() {
               />
             </Box>
           }
+          accessibilityRole="list"
+          importantForAccessibility="no"
           showsVerticalScrollIndicator={false}
           data={list}
           ListEmptyComponent={

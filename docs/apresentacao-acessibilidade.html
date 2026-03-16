@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Acessibilidade em Apps Mobile</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/night.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
+  <style>
+    :root {
+      --accent: #a78bfa;
+      --accent2: #34d399;
+      --danger: #f87171;
+      --warn: #fbbf24;
+    }
+
+    .reveal h1, .reveal h2, .reveal h3 {
+      text-transform: none;
+      letter-spacing: -0.02em;
+    }
+
+    .reveal h1 { font-size: 2.2em; }
+    .reveal h2 { font-size: 1.6em; color: var(--accent); }
+    .reveal h3 { font-size: 1.1em; color: #94a3b8; font-weight: 400; }
+
+    .reveal pre {
+      box-shadow: 0 0 0 1px rgba(167,139,250,0.3);
+      border-radius: 8px;
+      font-size: 0.72em;
+    }
+
+    .reveal code { font-family: 'Fira Code', 'Cascadia Code', monospace; }
+
+    .tag {
+      display: inline-block;
+      padding: 4px 14px;
+      border-radius: 999px;
+      font-size: 0.55em;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      vertical-align: middle;
+      margin-left: 10px;
+    }
+    .tag-before  { background: #ef4444; color: #fff; }
+    .tag-after   { background: #10b981; color: #fff; }
+    .tag-tip     { background: #6366f1; color: #fff; }
+    .tag-rule    { background: #f59e0b; color: #000; }
+
+    .cols { display: flex; gap: 2rem; align-items: flex-start; }
+    .cols > * { flex: 1; }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .stat-box {
+      background: rgba(167,139,250,0.08);
+      border: 1px solid rgba(167,139,250,0.25);
+      border-radius: 12px;
+      padding: 1.2rem 1rem;
+    }
+    .stat-box .num {
+      font-size: 2em;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .stat-box p {
+      font-size: 0.6em;
+      color: #94a3b8;
+      margin: 0.4rem 0 0;
+    }
+
+    .pattern-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      text-align: left;
+      margin-bottom: 0.6rem;
+    }
+    .pattern-card .label {
+      font-size: 0.55em;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #94a3b8;
+      margin-bottom: 0.3rem;
+    }
+    .pattern-card .value {
+      font-size: 0.65em;
+      color: #e2e8f0;
+    }
+
+    .check { color: var(--accent2); margin-right: 6px; }
+    .cross { color: var(--danger); margin-right: 6px; }
+    .warn  { color: var(--warn); margin-right: 6px; }
+
+    .rule-box {
+      background: rgba(245,158,11,0.1);
+      border-left: 4px solid var(--warn);
+      border-radius: 0 8px 8px 0;
+      padding: 0.7rem 1rem;
+      font-size: 0.65em;
+      text-align: left;
+      margin-top: 1rem;
+      color: #fde68a;
+    }
+
+    .demo-box {
+      background: rgba(99,102,241,0.1);
+      border: 1px dashed rgba(99,102,241,0.5);
+      border-radius: 12px;
+      padding: 1.5rem;
+      font-size: 0.7em;
+      color: #c7d2fe;
+    }
+    .demo-box strong { color: #a5b4fc; display: block; margin-bottom: 0.4rem; font-size: 1.1em; }
+
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .comparison .side {
+      border-radius: 10px;
+      padding: 1rem;
+      font-size: 0.55em;
+      text-align: left;
+    }
+    .comparison .before { background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.3); }
+    .comparison .after  { background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.3); }
+    .comparison .side .heading {
+      font-weight: 700;
+      font-size: 1.2em;
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .touch-demo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 4rem;
+      margin-top: 1.5rem;
+    }
+    .touch-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .touch-circle {
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #fff;
+    }
+    .touch-bad  { width: 72px; height: 72px; background: rgba(239,68,68,0.3); border: 2px solid #ef4444; font-size: 0.9em; }
+    .touch-good { width: 88px; height: 88px; background: rgba(16,185,129,0.3); border: 2px solid #10b981; }
+    .touch-box span { font-size: 0.55em; color: #94a3b8; }
+
+    .quote-block {
+      border-left: 4px solid var(--accent);
+      padding: 1rem 1.5rem;
+      font-style: italic;
+      font-size: 0.85em;
+      color: #cbd5e1;
+      background: rgba(167,139,250,0.06);
+      border-radius: 0 8px 8px 0;
+      text-align: left;
+    }
+
+    .reveal .slides section { padding: 20px 40px; }
+
+    .footer-note {
+      position: fixed;
+      bottom: 14px;
+      right: 20px;
+      font-size: 0.35em;
+      color: #475569;
+    }
+  </style>
+</head>
+<body>
+<div class="reveal">
+  <div class="slides">
+
+    <!-- SLIDE 1: TITLE -->
+    <section>
+      <br/>
+      <p style="font-size:0.6em; color: var(--accent); font-weight:700; letter-spacing:0.15em; text-transform:uppercase; margin-bottom:0.5rem;">React Native · Mobile</p>
+      <h1>Acessibilidade<br/>em Apps Mobile</h1>
+      <h3>Como construir interfaces que funcionam para todos</h3>
+      <br/>
+      <p style="font-size:0.5em; color:#475569;">Navegar com ➡ | Sair com ESC</p>
+    </section>
+
+    <!-- SLIDE 2: POR QUE IMPORTA -->
+    <section>
+      <h2>Por que isso importa?</h2>
+      <div class="stat-grid">
+        <div class="stat-box">
+          <div class="num">1.3B</div>
+          <p>pessoas com algum tipo de deficiência no mundo<br/><em>(OMS, 2023)</em></p>
+        </div>
+        <div class="stat-box">
+          <div class="num">16%</div>
+          <p>da população mundial — 1 em cada 6 pessoas</p>
+        </div>
+        <div class="stat-box">
+          <div class="num" style="color:var(--accent2)">LBI</div>
+          <p>Lei Brasileira de Inclusão (13.146/2015) — obriga apps a serem acessíveis</p>
+        </div>
+      </div>
+      <br/>
+      <p style="font-size:0.6em; color:#94a3b8;">Acessibilidade não é só cegueira: tremor, baixa visão, braço ocupado, sol forte, idade avançada.</p>
+    </section>
+
+    <!-- SLIDE 3: COMO FUNCIONA -->
+    <section>
+      <h2>Como o leitor de tela enxerga seu app</h2>
+      <br/>
+      <div class="cols">
+        <div>
+          <p style="font-size:0.65em; color:#94a3b8; margin-bottom:1rem;">O VoiceOver (iOS) e TalkBack (Android) leem a <strong style="color:#e2e8f0">árvore de acessibilidade</strong> — não o que está na tela visualmente.</p>
+          <div class="pattern-card">
+            <div class="label">O leitor anuncia</div>
+            <div class="value">Role → Label → Hint → State</div>
+          </div>
+          <div class="pattern-card">
+            <div class="label">Exemplo esperado</div>
+            <div class="value" style="color:var(--accent2)">"Inception, nota 8.8, lançado em 2010. Botão. Toque duas vezes para ver detalhes."</div>
+          </div>
+          <div class="pattern-card">
+            <div class="label">Exemplo sem acessibilidade</div>
+            <div class="value" style="color:var(--danger)">"Botão. Botão. Imagem. 8.8. 2010. Inception."</div>
+          </div>
+        </div>
+        <div>
+          <div class="demo-box">
+            <strong>🎬 Demo ao vivo</strong>
+            Ativar VoiceOver e navegar pelo app<br/><br/>
+            <span style="color:#6366f1">iOS:</span> Ajustes → Acessibilidade → VoiceOver<br/>
+            <span style="color:#34d399">Android:</span> Configurações → Acessibilidade → TalkBack<br/><br/>
+            <span style="opacity:0.6">Mostrar a tela de populares antes e depois das correções</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 4: PADRÃO 1 -->
+    <section>
+      <h2>Padrão 1 — Elemento Interativo</h2>
+      <p style="font-size:0.55em; color:#94a3b8; margin-bottom: 1rem;">Todo botão precisa de três propriedades. Sem exceção.</p>
+
+      <div class="comparison">
+        <div class="side before">
+          <div class="heading"><span class="cross">✗</span> Antes</div>
+          <pre><code class="language-tsx">&lt;TouchableOpacity
+  onPress={() =&gt; goBack()}
+&gt;
+  &lt;Icon name="arrow-left" /&gt;
+  &lt;Text&gt;Voltar&lt;/Text&gt;
+&lt;/TouchableOpacity&gt;</code></pre>
+          <p style="color:#f87171; margin-top:0.6rem;">O VoiceOver lê: <em>"Voltar. Imagem."</em> — lê tudo separado, sem contexto</p>
+        </div>
+        <div class="side after">
+          <div class="heading"><span class="check">✓</span> Depois</div>
+          <pre><code class="language-tsx">&lt;TouchableOpacity
+  accessibilityRole="button"
+  accessibilityLabel="Voltar"
+  accessibilityHint="Toque duas vezes para
+    voltar para a tela anterior"
+  minHeight={44}
+&gt;
+  &lt;Icon accessible={false} /&gt;
+  &lt;Text accessible={false} /&gt;
+&lt;/TouchableOpacity&gt;</code></pre>
+          <p style="color:#34d399; margin-top:0.6rem;">O VoiceOver lê: <em>"Voltar. Botão. Toque duas vezes para voltar."</em></p>
+        </div>
+      </div>
+
+      <div class="rule-box">
+        <span class="warn">⚠</span> <strong>Regra:</strong> role + label + hint. Filhos decorativos devem ser marcados como <code>accessible={false}</code> para não duplicar.
+      </div>
+    </section>
+
+    <!-- SLIDE 5: PADRÃO 2 -->
+    <section>
+      <h2>Padrão 2 — Estado Dinâmico</h2>
+      <p style="font-size:0.55em; color:#94a3b8; margin-bottom: 1rem;">Quando o visual muda, o label e o estado de acessibilidade precisam mudar junto.</p>
+
+      <div class="comparison">
+        <div class="side before">
+          <div class="heading"><span class="cross">✗</span> Antes</div>
+          <pre><code class="language-tsx">&lt;TouchableOpacity
+  onPress={toggleFavorite}
+  accessibilityRole="button"
+  accessibilityLabel="Favorito"
+&gt;
+  &lt;Icon name={isFav ? "heart-fill" : "heart"} /&gt;
+&lt;/TouchableOpacity&gt;</code></pre>
+          <p style="color:#f87171; margin-top:0.6rem;">Label fixo — usuário não sabe se já é favorito ou não</p>
+        </div>
+        <div class="side after">
+          <div class="heading"><span class="check">✓</span> Depois</div>
+          <pre><code class="language-tsx">&lt;TouchableOpacity
+  onPress={toggleFavorite}
+  accessibilityRole="button"
+  accessibilityLabel={
+    isFav
+      ? "Remover dos favoritos"
+      : "Adicionar aos favoritos"
+  }
+  accessibilityHint={
+    isFav
+      ? "Toque duas vezes para remover"
+      : "Toque duas vezes para adicionar"
+  }
+  accessibilityState={{ selected: isFav }}
+&gt;</code></pre>
+          <p style="color:#34d399; margin-top:0.6rem;">Label e estado refletem a realidade</p>
+        </div>
+      </div>
+
+      <div class="rule-box">
+        <span class="warn">⚠</span> <strong>Regra:</strong> <code>accessibilityState</code> comunica o estado atual ao leitor. <code>selected</code>, <code>disabled</code>, <code>checked</code> — use sempre que o elemento tiver estado.
+      </div>
+    </section>
+
+    <!-- SLIDE 6: PADRÃO 3 -->
+    <section>
+      <h2>Padrão 3 — Agrupar e Esconder</h2>
+      <p style="font-size:0.55em; color:#94a3b8; margin-bottom: 1rem;">Se o pai descreve tudo, os filhos precisam sumir da árvore de acessibilidade.</p>
+
+      <div class="comparison">
+        <div class="side before">
+          <div class="heading"><span class="cross">✗</span> Antes</div>
+          <pre><code class="language-tsx">// Card sem agrupar
+&lt;TouchableOpacity&gt;
+  &lt;Image source={poster} /&gt;
+  &lt;Text&gt;Inception&lt;/Text&gt;
+  &lt;Icon name="star" /&gt;
+  &lt;Text&gt;8.8&lt;/Text&gt;
+  &lt;Text&gt;2010&lt;/Text&gt;
+&lt;/TouchableOpacity&gt;</code></pre>
+          <p style="color:#f87171; margin-top:0.6rem;">Lê: <em>"Imagem. Inception. Imagem. 8.8. 2010."</em> — 5 focagens para 1 card</p>
+        </div>
+        <div class="side after">
+          <div class="heading"><span class="check">✓</span> Depois</div>
+          <pre><code class="language-tsx">// Pai descreve tudo em uma frase
+&lt;TouchableOpacity
+  accessibilityRole="button"
+  accessibilityLabel="Inception, nota 8.8,
+    lançado em 2010"
+  accessibilityHint="Abra e veja os detalhes"
+&gt;
+  &lt;Image accessible={false} /&gt;
+  &lt;View
+    accessibilityElementsHidden={true}
+    importantForAccessibility="no"
+  &gt;
+    &lt;Text&gt;Inception&lt;/Text&gt;
+    ...
+  &lt;/View&gt;
+&lt;/TouchableOpacity&gt;</code></pre>
+          <p style="color:#34d399; margin-top:0.6rem;">1 focagem, tudo anunciado de uma vez</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 7: INCONSISTÊNCIA -->
+    <section>
+      <h2>O problema real: inconsistência</h2>
+      <p style="font-size:0.6em; color:#94a3b8; margin-bottom:1.2rem;">Mesmo projeto, mesmo time, comportamento diferente em cada tela.</p>
+
+      <div class="comparison">
+        <div class="side before">
+          <div class="heading"><span class="cross">✗</span> search.tsx / favorites.tsx</div>
+          <pre><code class="language-tsx">&lt;FlatList
+  data={list}
+  renderItem={...}
+/&gt;
+// Sem nenhuma propriedade de acessibilidade
+// O leitor de tela não sabe que é uma lista</code></pre>
+        </div>
+        <div class="side after">
+          <div class="heading"><span class="check">✓</span> index.tsx</div>
+          <pre><code class="language-tsx">&lt;FlatList
+  accessibilityRole="list"
+  importantForAccessibility="no"
+  data={list}
+  renderItem={...}
+/&gt;
+// Leitor anuncia: "Lista. X itens."</code></pre>
+        </div>
+      </div>
+
+      <br/>
+      <div class="quote-block">
+        Acessibilidade feita sem convenção de equipe vira acidente.<br/>
+        Você precisa de <strong style="color:#e2e8f0">padrão</strong>, não de boa vontade individual.
+      </div>
+    </section>
+
+    <!-- SLIDE 8: TAMANHO DE TOQUE -->
+    <section>
+      <h2>Tamanho mínimo de toque: 44pt</h2>
+      <p style="font-size:0.55em; color:#94a3b8;">Guideline da Apple Human Interface e Android Material Design.</p>
+      <p style="font-size:0.55em; color:#94a3b8; margin-bottom:1rem;">Beneficia: pessoas com tremor, mobilidade reduzida, dedos grandes, uso com uma mão.</p>
+
+      <div class="touch-demo">
+        <div class="touch-box">
+          <div class="touch-circle touch-bad">36px</div>
+          <span style="color:var(--danger)">✗ Pequeno demais</span>
+          <span>Nosso botão de lixeira</span>
+        </div>
+        <div style="font-size:2em; color:#475569">→</div>
+        <div class="touch-box">
+          <div class="touch-circle touch-good" style="font-size:0.85em;">44pt</div>
+          <span style="color:var(--accent2)">✓ Correto</span>
+          <span>BackButton, botões de detalhe</span>
+        </div>
+      </div>
+
+      <br/>
+      <div class="cols" style="gap:1rem;">
+        <pre style="flex:1"><code class="language-tsx">// ✗ Antes
+&lt;TouchableOpacity
+  style={{ width: 36, height: 36 }}
+&gt;</code></pre>
+        <pre style="flex:1"><code class="language-tsx">// ✓ Depois
+&lt;TouchableOpacity
+  style={{ minHeight: 44 }}
+  hitSlop={{
+    top: 8, bottom: 8,
+    left: 8, right: 8
+  }}
+&gt;</code></pre>
+      </div>
+      <div class="rule-box">
+        <span class="warn">⚠</span> <code>hitSlop</code> expande a área de toque sem mudar o visual. Use quando o elemento precisa ser pequeno visualmente mas acessível.
+      </div>
+    </section>
+
+    <!-- SLIDE 9: RESUMO PRÁTICO -->
+    <section>
+      <h2>Checklist para o dia a dia</h2>
+      <br/>
+      <div style="text-align:left; font-size:0.65em; max-width:700px; margin:0 auto;">
+        <p><span class="check">✓</span> Todo elemento tocável tem <code>accessibilityRole</code> + <code>accessibilityLabel</code> + <code>accessibilityHint</code></p>
+        <p><span class="check">✓</span> Labels mudam com o estado — nunca fixos em botões dinâmicos</p>
+        <p><span class="check">✓</span> Ícones decorativos têm <code>accessible={false}</code> ou <code>accessibilityLabel=""</code></p>
+        <p><span class="check">✓</span> Listas têm <code>accessibilityRole="list"</code> e <code>importantForAccessibility="no"</code></p>
+        <p><span class="check">✓</span> Elementos tocáveis têm no mínimo 44x44pt</p>
+        <p><span class="check">✓</span> Componentes compostos agrupam no pai e escondem os filhos</p>
+        <p><span class="check">✓</span> Teste com VoiceOver/TalkBack ligado antes do PR</p>
+      </div>
+      <br/>
+      <p style="font-size:0.55em; color:#475569;">Ferramenta útil: <strong style="color:#94a3b8">Accessibility Inspector</strong> (Xcode) para auditar sem precisar de dispositivo físico</p>
+    </section>
+
+    <!-- SLIDE 10: CONCLUSÃO -->
+    <section>
+      <br/><br/>
+      <h2 style="color:#e2e8f0; font-size:2em;">Acessibilidade feita cedo<br/>é uma <span style="color:var(--accent2)">feature</span>.</h2>
+      <h2 style="color:#e2e8f0; font-size:2em; margin-top:0.5rem;">Feita depois<br/>é uma <span style="color:var(--warn)">dívida técnica</span>.</h2>
+      <h2 style="color:#e2e8f0; font-size:2em; margin-top:0.5rem;">Feita nunca<br/>é <span style="color:var(--danger)">exclusão</span>.</h2>
+    </section>
+
+  </div>
+</div>
+
+<div class="footer-note">Acessibilidade em Apps Mobile · React Native</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,
+    transition: 'slide',
+    transitionSpeed: 'fast',
+    controls: true,
+    progress: true,
+    center: true,
+    plugins: [RevealHighlight, RevealNotes],
+    highlight: {
+      highlightOnLoad: true,
+    }
+  });
+</script>
+</body>
+</html>

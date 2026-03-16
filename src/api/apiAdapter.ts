@@ -7,7 +7,7 @@ function toPageModel<ApiType, ModelType>(
   return {
     page: page.page,
     total_pages: page.total_pages,
-    results: page.results.map(adapterToModel),
+    results: page.results.map(adapterToModel).filter((r) => r !== null) as ModelType[],
   };
 }
 

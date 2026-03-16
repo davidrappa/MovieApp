@@ -9,12 +9,24 @@ import {
 
 const TMDB_IMAGE_URL = "https://image.tmdb.org/t/p/w500";
 
-function toMovies(movieAPI: MovieAPI): Movie {
+function toMovies(movieAPI: MovieAPI): Movie | null {
+  if (!movieAPI.id || !movieAPI.title || !movieAPI.poster_path) {
+    return null;
+  }
+
+  let releaseYear: number;
+  if (movieAPI.release_date) {
+    const parsed = new Date(movieAPI.release_date).getFullYear();
+    releaseYear = isNaN(parsed) ? new Date().getFullYear() : parsed;
+  } else {
+    releaseYear = new Date().getFullYear();
+  }
+
   return {
     id: movieAPI.id,
     title: movieAPI.title,
-    releaseYear: new Date(movieAPI.release_date).getFullYear(),
-    rating: movieAPI.vote_average.toPrecision(2),
+    releaseYear,
+    rating: movieAPI.vote_average?.toPrecision(2) ?? "0.0",
     posterURL: TMDB_IMAGE_URL + movieAPI.poster_path,
   };
 }
@@ -22,9 +34,8 @@ function toMovieDetails(movieDetailsAPI: MovieDetailsAPI): MovieDetails {
   const hours = Math.floor(movieDetailsAPI.runtime / 60);
   const minutes = movieDetailsAPI.runtime % 60;
   const formattedDuration = `${hours}h ${minutes}min`;
-  const releaseDate = new Date(movieDetailsAPI.release_date).toLocaleDateString(
-    "en-GB"
-  );
+  const [year, month, day] = movieDetailsAPI.release_date.split('-');
+  const releaseDate = `${day}/${month}/${year}`;
 
   return {
     id: movieDetailsAPI.id,

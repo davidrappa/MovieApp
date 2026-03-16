@@ -1,9 +1,9 @@
 import React, { useRef, useState } from "react";
 import {
-  Pressable,
-  TextInput as RNTextInput,
-  TextInputProps as RNTextInputProps,
-  TextStyle,
+    Pressable,
+    TextInput as RNTextInput,
+    TextInputProps as RNTextInputProps,
+    TextStyle,
 } from "react-native";
 import { useAppTheme } from "../theme/useAppTheme";
 import { Box, BoxProps } from "./Box";
@@ -52,11 +52,18 @@ export function TextInput({
     setIsFocused(true);
   }
 
+  const accessibilityLabel = rnTextInputProps.accessibilityLabel || label || rnTextInputProps.placeholder;
+  const accessibilityHint = rnTextInputProps.accessibilityHint || "Digite o texto no campo de entrada";
+
   return (
     <Box flexGrow={1} flexShrink={1} backgroundColor="gray100" {...boxProps}>
-      <Pressable onPress={focusInput}>
+      <Pressable onPress={focusInput} accessibilityRole="none">
         {label && (
-          <Text variant="textMD" marginBottom="s4">
+          <Text 
+            variant="textMD" 
+            marginBottom="s4"
+            accessibilityRole="text"
+          >
             {label}
           </Text>
         )}
@@ -64,9 +71,11 @@ export function TextInput({
           {...$textInputContainer}
           {...containerProps}
           backgroundColor="gray100"
+          accessibilityElementsHidden={true}
+          importantForAccessibility="no"
         >
           {LeftComponent && (
-            <Box justifyContent="center" mr="s16">
+            <Box justifyContent="center" mr="s16" accessibilityElementsHidden={true} importantForAccessibility="no">
               {LeftComponent}
             </Box>
           )}
@@ -77,10 +86,14 @@ export function TextInput({
             onFocus={() => setIsFocused(true)}
             placeholderTextColor={colors.gray500}
             style={$textInputStyle}
+            accessibilityLabel={accessibilityLabel}
+            accessibilityHint={accessibilityHint}
+            accessibilityRole="textbox"
+            accessibilityState={{ disabled: rnTextInputProps.editable === false }}
             {...rnTextInputProps}
           />
           {RightComponent && (
-            <Box justifyContent="center" ml="s16">
+            <Box justifyContent="center" ml="s16" accessibilityElementsHidden={true} importantForAccessibility="no">
               {RightComponent}
             </Box>
           )}
