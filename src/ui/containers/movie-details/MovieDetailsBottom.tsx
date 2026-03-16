@@ -32,11 +32,6 @@ export function MovieDetailsBottom({
         alignItems="center"
         width={48}
         height={48}
-        accessibilityHint="Adicione o filme nos seus favoritos"
-        accessibilityLabel={
-          isFavorite ? "Remover dos favoritos" : "Adicionar aos favoritos"
-        }
-        accessibilityRole="button"
       >
         {isFavorite ? (
           <Icon name="trash" size={24} color="purpleLight" />
@@ -47,9 +42,6 @@ export function MovieDetailsBottom({
       <TouchableOpacityBox
         disabled={isLoading}
         onPress={openTrailerLink}
-        accessibilityHint="Abra para ver o trailer do filme"
-        accessibilityLabel="Trailer do filme no YouTube"
-        accessibilityRole="button"
         backgroundColor="purpleBase"
         borderRadius="s6"
         flexDirection="row"

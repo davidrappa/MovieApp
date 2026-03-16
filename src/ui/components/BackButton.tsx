@@ -19,9 +19,6 @@ export function BackButton() {
       alignItems="center"
       paddingHorizontal="s10"
       paddingVertical="s6"
-      accessibilityLabel="Voltar para a tela anterior"
-      accessibilityHint="Aperte para voltar para tela anterior"
-      accessibilityRole="button"
     >
       <Icon name="arrowLeft" size={20} color="gray600" />
       <Text variant="textMD" color="gray600">

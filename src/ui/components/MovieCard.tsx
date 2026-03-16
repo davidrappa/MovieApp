@@ -21,12 +21,7 @@ export function MovieCard({ item }: MovieCardProps) {
   const { isFavorite, toggleFavorite } = useFavoritesStore();
   return (
     <Link push href={`/movie-details/${item.id}`} asChild>
-      <TouchableOpacityBox
-        borderRadius="s10"
-        accessibilityRole="button"
-        accessibilityLabel={`Filme ${item.title}, nota ${item.rating} lançado em ${item.releaseYear}.`}
-        accessibilityHint="Abra e veja os detalhes do filme"
-      >
+      <TouchableOpacityBox borderRadius="s10">
         <ImageBackground
           source={{ uri: item.posterURL }}
           style={{
