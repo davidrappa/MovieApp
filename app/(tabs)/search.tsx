@@ -19,7 +19,7 @@ export default function SearchScreen() {
   const debounceQuery = useDebounce(query);
 
   const { list, fetchNextPage } = useMoviesByQuery(
-    debounceQuery.toLocaleLowerCase()
+    debounceQuery.toLocaleLowerCase(),
   );
 
   return (
