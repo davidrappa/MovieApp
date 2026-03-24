@@ -22,6 +22,8 @@ export default function FavoritesScreen() {
               subtitle="Sua lista de filmes salvos"
             />
           }
+          accessibilityRole="list"
+          importantForAccessibility="no"
           showsVerticalScrollIndicator={false}
           data={favorites}
           ListEmptyComponent={

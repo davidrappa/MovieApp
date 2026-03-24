@@ -35,10 +35,24 @@ export function Icon({
 
   if (onPress) {
     return (
-      <Pressable hitSlop={10} onPress={onPress}>
+      <Pressable
+        hitSlop={10}
+        onPress={onPress}
+        accessible={true}
+        accessibilityRole={accessibilityRole}
+        accessibilityLabel={accessibilityLabel || `Botão ${name}`}
+        accessibilityHint={
+          accessibilityLabel ? undefined : "Toque duas vezes para ativar"
+        }
+      >
         <SVGIcon color={colors[color] as ThemeColors} size={size} />
       </Pressable>
     );
+  }
+
+  // Decorative icon - should be hidden from accessibility tree if no label provided
+  if (accessibilityLabel === undefined || accessibilityLabel === "") {
+    return <SVGIcon color={colors[color] as ThemeColors} size={size} />;
   }
 
   return <SVGIcon color={colors[color] as ThemeColors} size={size} />;

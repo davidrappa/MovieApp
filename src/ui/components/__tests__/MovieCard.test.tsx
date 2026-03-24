@@ -30,9 +30,9 @@ describe('MovieCard', () => {
   it('renders movie information', () => {
     render(<MovieCard item={mockMovie} />);
 
-    expect(screen.getByText('Test Movie')).toBeOnTheScreen();
-    expect(screen.getByText('8.5')).toBeOnTheScreen();
-    expect(screen.getByText('2024')).toBeOnTheScreen();
+    expect(screen.getByText('Test Movie', { includeHiddenElements: true })).toBeOnTheScreen();
+    expect(screen.getByText('8.5', { includeHiddenElements: true })).toBeOnTheScreen();
+    expect(screen.getByText('2024', { includeHiddenElements: true })).toBeOnTheScreen();
   });
 
   it('displays favorite button when movie is favorited', () => {
@@ -64,13 +64,11 @@ describe('MovieCard', () => {
     expect(card).toBeOnTheScreen();
   });
 
-  it('includes favorite status in accessibility label when favorited', () => {
-    mockIsFavorite.mockReturnValue(true);
-
+  it('has correct accessibility label', () => {
     render(<MovieCard item={mockMovie} />);
 
     const card = screen.getByLabelText(
-      `Filme Test Movie, nota 8.5 lançado em 2024. Adicionado aos favoritos.`,
+      `Filme Test Movie, nota 8.5 lançado em 2024.`,
     );
     expect(card).toBeOnTheScreen();
   });

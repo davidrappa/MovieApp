@@ -31,7 +31,7 @@ describe('EmptyList', () => {
   it('has correct accessibility role', () => {
     render(<EmptyList title="No items" />);
 
-    const container = screen.getByRole('text');
-    expect(container).toBeOnTheScreen();
+    const container = screen.getByLabelText('No items');
+    expect(container.props.accessibilityRole).toBe('text');
   });
 });

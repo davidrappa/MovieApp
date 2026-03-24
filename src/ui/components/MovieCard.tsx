@@ -20,61 +20,74 @@ interface MovieCardProps {
 export function MovieCard({ item }: MovieCardProps) {
   const { isFavorite, toggleFavorite } = useFavoritesStore();
   return (
-    <Link push href={`/movie-details/${item.id}`} asChild>
-      <TouchableOpacityBox borderRadius="s10">
-        <ImageBackground
-          source={{ uri: item.posterURL }}
-          style={{
-            width: SCREEN_WIDTH / 2 - 28,
-            height: POSTER_HEIGHT,
-            borderRadius: 10,
-            overflow: "hidden",
-            position: "relative",
-          }}
+    <Box>
+      <Link push href={`/movie-details/${item.id}`} asChild>
+        <TouchableOpacityBox
+          borderRadius="s10"
+          accessibilityRole="button"
+          accessibilityLabel={`Filme ${item.title}, nota ${item.rating} lançado em ${item.releaseYear}.`}
+          accessibilityHint="Abra e veja os detalhes do filme"
         >
-          {isFavorite(item.id) && (
-            <Box position="absolute" right={4} top={4} zIndex={3}>
-              <TouchableOpacityBox
-                onPress={() => toggleFavorite(item)}
-                width={36}
-                height={36}
-                backgroundColor="gray300"
-                borderRadius="s6"
-                justifyContent="center"
-                alignItems="center"
-              >
-                <Icon name="trash" size={20} color="purpleLight" />
-              </TouchableOpacityBox>
-            </Box>
-          )}
-          <LinearGradient
-            style={{ width: "100%", height: "100%" }}
-            colors={["transparent", "rgba(0,0,0,0.8)"]}
+          <ImageBackground
+            source={{ uri: item.posterURL }}
+            accessible={false}
+            style={{
+              width: SCREEN_WIDTH / 2 - 28,
+              height: POSTER_HEIGHT,
+              borderRadius: 10,
+              overflow: "hidden",
+            }}
           >
-            <Box justifyContent="flex-end" flex={1} padding="s12">
-              <Text marginBottom="s4" variant="titleMD" color="gray700">
-                {item.title}
-              </Text>
+            <LinearGradient
+              style={{ width: "100%", height: "100%" }}
+              colors={["transparent", "rgba(0,0,0,0.8)"]}
+              accessibilityElementsHidden={true}
+              importantForAccessibility="no"
+            >
+              <Box justifyContent="flex-end" flex={1} padding="s12">
+                <Text marginBottom="s4" variant="titleMD" color="gray700">
+                  {item.title}
+                </Text>
 
-              <Box flexDirection="row" alignItems="center" gap="s6">
-                <Icon name="star" size={10} color="white" />
-                <Text variant="textXS" color="gray600">
-                  {item.rating}
-                </Text>
-                <Box
-                  width={4}
-                  height={4}
-                  backgroundColor="gray600"
-                  borderRadius="s6"
-                />
-                <Text color="gray600" variant="textXS">
-                  {item.releaseYear}
-                </Text>
+                <Box flexDirection="row" alignItems="center" gap="s6">
+                  <Icon name="star" size={10} color="white" />
+                  <Text variant="textXS" color="gray600">
+                    {item.rating}
+                  </Text>
+                  <Box
+                    width={4}
+                    height={4}
+                    backgroundColor="gray600"
+                    borderRadius="s6"
+                  />
+                  <Text color="gray600" variant="textXS">
+                    {item.releaseYear}
+                  </Text>
+                </Box>
               </Box>
-            </Box>
-          </LinearGradient>
-        </ImageBackground>
-      </TouchableOpacityBox>
-    </Link>
+            </LinearGradient>
+          </ImageBackground>
+        </TouchableOpacityBox>
+      </Link>
+
+      {isFavorite(item.id) && (
+        <Box position="absolute" right={4} top={4} zIndex={3}>
+          <TouchableOpacityBox
+            onPress={() => toggleFavorite(item)}
+            width={44}
+            height={44}
+            backgroundColor="gray300"
+            borderRadius="s6"
+            justifyContent="center"
+            alignItems="center"
+            accessibilityRole="button"
+            accessibilityLabel="Remover dos favoritos"
+            accessibilityHint="Toque duas vezes para remover este filme dos favoritos"
+          >
+            <Icon name="trash" size={20} color="purpleLight" accessibilityLabel="" accessibilityRole="image" />
+          </TouchableOpacityBox>
+        </Box>
+      )}
+    </Box>
   );
 }

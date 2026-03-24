@@ -19,7 +19,7 @@ export default function SearchScreen() {
   const debounceQuery = useDebounce(query);
 
   const { list, fetchNextPage } = useMoviesByQuery(
-    debounceQuery.toLocaleLowerCase()
+    debounceQuery.toLocaleLowerCase(),
   );
 
   return (
@@ -41,6 +41,8 @@ export default function SearchScreen() {
               />
             </Box>
           }
+          accessibilityRole="list"
+          importantForAccessibility="no"
           showsVerticalScrollIndicator={false}
           data={list}
           ListEmptyComponent={

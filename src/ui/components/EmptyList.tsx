@@ -10,11 +10,22 @@ interface EmptyListProps {
 
 export function EmptyList({ title, subtitle, containerProps }: EmptyListProps) {
   return (
-    <Box alignItems="center" {...containerProps}>
-      <Icon name="list" size={44} color="gray500" />
+    <Box 
+      alignItems="center" 
+      {...containerProps}
+      accessibilityRole="text"
+      accessibilityLabel={title && subtitle ? `${title}. ${subtitle}` : title || subtitle || "Lista vazia"}
+    >
+      <Icon 
+        name="list" 
+        size={44} 
+        color="gray500"
+        accessibilityLabel=""
+        accessibilityRole="image"
+      />
       <Box mt="s12" alignItems="center">
         {title && (
-          <Text variant="textMDB" color="gray500" mb="s4">
+          <Text variant="textMDB" color="gray500" mb="s4" accessibilityRole="header">
             {title}
           </Text>
         )}
